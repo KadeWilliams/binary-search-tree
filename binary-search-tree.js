@@ -64,7 +64,55 @@ class Tree {
     return root;
   }
 
-  delete(value) {}
+  delete(value, root = this.root) {
+    if (root == null) {
+      return root;
+    }
+
+    if (root.data > value) {
+      root.leftPart = this.delete(value, root.leftPart);
+    } else if (root.data < value) {
+      root.rightPart = this.delete(value, root.rightPart);
+    } else {
+      if (root.leftPart == null) {
+        return root.rightPart;
+      } else if (root.rightPart == null) {
+        return root.leftPart;
+      }
+      root.data = minValue(root);
+      root.rightPart = this.delete(root.rightPart, root.data);
+    }
+    return root;
+  }
+
+  levelOrder(accumulator) {
+    
+  } 
+
+  height(root) {
+    if (root == null) {
+      return 0;
+    } else {
+
+      let left = this.height(root.leftPart);
+      let right = this.height(root.rightPart);
+
+      if (left > right) {
+        return right + 1;
+      } else {
+        return left + 1;
+      }
+    }
+  }
+}
+
+function minValue(root) {
+  let min = root.data;
+  while (root != null) {
+    min = root.data;
+    root = root.leftPart;
+  }
+  return min;
 }
 
 function mergeSort(array) {
@@ -90,18 +138,8 @@ function removeDuplicates(array) {
   return [...new Set(array)];
 }
 
-const newTree = new Tree([
-  2, 5, 6, 235, 5, 236, 23, 62, 52, 345, 21, 35, 45, 346,
-]);
-
-console.log(newTree.insert(1));
-
-// newTree.traverse(newTree.root);
-
-// newTree.find(newTree.root, 5);
-// newTree.insert(5);
-console.log(newTree.find(1));
-
-// console.log(newTree.root);
+function accumulator(element) {
+  alert(element);
+}
 
 export { Tree };
