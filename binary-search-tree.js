@@ -26,15 +26,15 @@ class Tree {
     return root;
   }
 
-  insert(root, value) {
+  insert(value, root = this.root) {
     if (root == null) {
       return (root = new Node(value));
     }
 
     if (root.data < value) {
-      root.rightPart = this.insert(root.rightPart, value);
+      root.rightPart = this.insert(value, root.rightPart);
     } else {
-      root.leftPart = this.insert(root.leftPart, value);
+      root.leftPart = this.insert(value, root.leftPart);
     }
 
     return root;
@@ -94,13 +94,14 @@ const newTree = new Tree([
   2, 5, 6, 235, 5, 236, 23, 62, 52, 345, 21, 35, 45, 346,
 ]);
 
-// console.log(newTree.insert(newTree.root, 1));
+console.log(newTree.insert(1));
 
 // newTree.traverse(newTree.root);
 
 // newTree.find(newTree.root, 5);
-newTree.find(5);
+// newTree.insert(5);
+console.log(newTree.find(1));
 
 // console.log(newTree.root);
 
-module.exports = Tree;
+export { Tree };
