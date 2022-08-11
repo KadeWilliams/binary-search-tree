@@ -41,14 +41,16 @@ class Tree {
     return root;
   }
 
-  traverse(root) {
+  traverse(root, array) {
+    if (array !== undefined) array.push(root.data);
     if (root.leftPart !== null) {
-      this.traverse(root.leftPart);
+      this.traverse(root.leftPart, array);
     }
 
     if (root.rightPart !== null) {
-      this.traverse(root.rightPart);
+      this.traverse(root.rightPart, array);
     }
+    return array;
   }
 
   find(value, root = this.root) {
@@ -192,7 +194,16 @@ class Tree {
     }
   }
 
-  rebalance(root) {}
+  rebalance() {
+    if (this.isBalanced(this.root)) return this.root;
+
+    let rebalancedNewTreeArray = [];
+    rebalancedNewTreeArray = this.traverse(this.root, rebalancedNewTreeArray);
+
+    let balancedTree = new Tree(rebalancedNewTreeArray);
+
+    return balancedTree.root;
+  }
 }
 
 function minValue(root) {
