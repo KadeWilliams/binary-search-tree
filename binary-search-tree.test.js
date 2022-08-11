@@ -200,12 +200,82 @@ describe("Methods of the tree", () => {
     it("newTree should be balanced", () => {
       expect(newTree.isBalanced(newTree.root)).toBeTruthy();
     });
-    //add more tests
+
+    it("newTree should NOT be balanced", () => {
+      newTree.insert(4242);
+      newTree.insert(4243);
+      newTree.insert(4244);
+      expect(newTree.isBalanced(newTree.root)).toBeFalsy();
+    });
   });
 
   describe("rebalance method", () => {
     it("newTree should be balanced", () => {
-      expect(newTree.isBalanced(newTree.root)).toBeTruthy();
+      expect(newTree.rebalance()).toMatchObject({
+        data: 52,
+        leftPart: {
+          data: 21,
+          leftPart: {
+            data: 5,
+            leftPart: {
+              data: 2,
+              leftPart: null,
+              rightPart: null,
+            },
+            rightPart: {
+              data: 6,
+              leftPart: null,
+              rightPart: null,
+            },
+          },
+          rightPart: {
+            data: 35,
+            leftPart: {
+              data: 23,
+              leftPart: null,
+              rightPart: null,
+            },
+            rightPart: {
+              data: 45,
+              leftPart: null,
+              rightPart: null,
+            },
+          },
+        },
+        rightPart: {
+          data: 345,
+          leftPart: {
+            data: 235,
+            leftPart: {
+              data: 62,
+              leftPart: null,
+              rightPart: null,
+            },
+            rightPart: {
+              data: 236,
+              leftPart: null,
+              rightPart: null,
+            },
+          },
+          rightPart: {
+            data: 4242,
+            leftPart: {
+              data: 346,
+              leftPart: null,
+              rightPart: null,
+            },
+            rightPart: {
+              data: 4243,
+              leftPart: null,
+              rightPart: {
+                data: 4244,
+                leftPart: null,
+                rightPart: null,
+              },
+            },
+          },
+        },
+      });
     });
   });
 });
